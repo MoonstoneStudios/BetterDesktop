@@ -1,0 +1,55 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:cp="clr-namespace:ThemeEditor.Controls.ColorPicker;assembly=ThemeEditor.Controls.ColorPicker"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="800"
+        x:Class="BetterDesktop.Views.SettingsWindow"
+		x:Name="SettingsWind"
+        Title="SettingsWindow"
+		Width="450" Height="800"
+		WindowStartupLocation="CenterScreen"
+		CanResize="False">
+
+	<Window.Styles>
+		<!--Hide the properties tab-->
+		<Style Selector="cp|ColorPicker /template/ cp|ColorPickerPropertiesPresenter#PART_ColorPickerPropertiesPresenter">
+			<Setter Property="IsVisible" Value="False" />
+		</Style>
+	</Window.Styles>
+
+	<Grid>
+		<ScrollViewer>		
+			<StackPanel Orientation="Vertical">
+
+				<TextBlock>
+					Settings
+				</TextBlock>
+		
+				<Rectangle Height="2" HorizontalAlignment="Stretch"
+						   Fill="White"/>
+
+				<TextBlock>
+					Paint color
+				</TextBlock>
+
+				<cp:ColorPicker Color="{Binding	Settings.PaintColor, Mode=TwoWay}"/>
+
+			</StackPanel>
+		</ScrollViewer>
+
+		<!--Sticky buttons at bottom.-->
+		<Grid ColumnDefinitions="*,*" HorizontalAlignment="Stretch"
+				VerticalAlignment="Bottom" Background="Black">
+			<Button HorizontalAlignment="Stretch"
+					Command="{Binding Cancel}"
+					CommandParameter="{Binding	ElementName=SettingsWind}">Close</Button>
+			<Button Grid.Column="1"
+					HorizontalAlignment="Stretch"
+					Command="{Binding Ok}"
+					CommandParameter="{Binding ElementName=SettingsWind}">Ok</Button>
+		</Grid>
+		
+	</Grid>
+	
+</Window>

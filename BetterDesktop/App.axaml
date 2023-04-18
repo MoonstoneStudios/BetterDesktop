@@ -8,5 +8,6 @@
 
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
+		<StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
     </Application.Styles>
 </Application>

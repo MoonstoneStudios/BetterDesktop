@@ -27,3 +27,13 @@ LVITEMA enum + alterations to code from previous link
 CC BY-SA 4.0
 Source: https://stackoverflow.com/a/60352109
 License: https://creativecommons.org/licenses/by-sa/4.0/
+
+Costomizing ColorPicker + library
+MIT License
+Source: https://github.com/wieslawsoltes/ColorPicker
+License: https://github.com/wieslawsoltes/ColorPicker/blob/master/LICENSE.TXT
+
+Copy Method and entire ObjectExtensions.cs file
+CC BY-SA 4.0 License
+Source: https://stackoverflow.com/a/11308879
+License: https://creativecommons.org/licenses/by-sa/4.0/

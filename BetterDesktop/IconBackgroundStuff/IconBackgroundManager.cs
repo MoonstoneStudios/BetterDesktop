@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+﻿using BetterDesktop.Models;
 using RegistryUtils;
 using System;
 using System.Drawing;
@@ -14,6 +14,8 @@ namespace BetterDesktop.IconBackgroundStuff
     {
         private Point[] points;
         private IntPtr workerW;
+
+        public Settings settings;
 
         public IconBackgroundManager()
         {
@@ -47,15 +49,16 @@ namespace BetterDesktop.IconBackgroundStuff
                 {
                     for (int i = 0; i < points.Length; i++)
                     {
+                        var solid = Color.FromArgb(255, settings.PaintColor.R, settings.PaintColor.G, settings.PaintColor.B);
                         // Use the Graphics instance to draw a white rectangle in the upper 
                         // left corner. In case you have more than one monitor think of the 
                         // drawing area as a rectangle that spans across all monitors, and 
                         // the 0,0 coordinate being in the upper left corner.
-                        bg.FillRectangle(new SolidBrush(Color.Black),
+                        bg.FillRectangle(new SolidBrush(solid),
                             points[i].X - 18, points[i].Y - 2, 76 + /*offset =>*/ 25, 100);
                     }
                 }
-                b = ChangeOpacity(b, 0.35f);
+                b = ChangeOpacity(b, settings.PaintColor.A / 255f);
                 // Create a Graphics instance from the Device Context
                 using (Graphics g = Graphics.FromHdc(dc))
                 {
