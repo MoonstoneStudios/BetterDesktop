@@ -1,0 +1,29 @@
+Used Code Licenses
+
+Change opacity of an image
+CPOL 1.02
+Source: https://www.codeproject.com/Tips/201129/Change-Opacity-of-Image-in-C
+License: http://www.codeproject.com/info/cpol10.aspx
+
+SendMessageTimeoutFlags enum
+Source: https://www.pinvoke.net/default.aspx/Enums/SendMessageTimeoutFlags.html
+License (term 4 of Terms of Use): http://www.pinvoke.net/termsofuse.htm
+
+How to change wallpaper of desktop
+CC BY-SA 3.0 License
+Source: hhttps://stackoverflow.com/a/1061682
+License: https://creativecommons.org/licenses/by-sa/3.0/
+
+Draw behind desktop icons
+CPOL 1.02 License
+Source: https://www.codeproject.com/Articles/856020/Draw-Behind-Desktop-Icons-in-Windows-plus
+License: http://www.codeproject.com/info/cpol10.aspx
+
+Get icon positions on desktop
+Source: https://social.msdn.microsoft.com/Forums/windows/en-US/d7df8a4d-fc0f-4b62-80c9-7768756456e6/how-can-i-get-desktops-icons-information-?forum=winforms
+From user: https://social.msdn.microsoft.com/profile/zhi-xin%20ye/
+
+LVITEMA enum + alterations to code from previous link
+CC BY-SA 4.0
+Source: https://stackoverflow.com/a/60352109
+License: https://creativecommons.org/licenses/by-sa/4.0/

@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:BetterDesktop.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="BetterDesktop.Views.MainWindow"
+		x:Name="MainWindowControl"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="BetterDesktop"
+		WindowStartupLocation="CenterScreen"
+		Width="800" Height="450"
+		SystemDecorations="BorderOnly"
+		CanResize="False">
+	
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<!--Main grid-->
+	<Grid>
+
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="2*"/>
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="35"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Button Grid.Column="1" 
+				HorizontalAlignment="Right"
+				Height="35"
+				Width="35" Background="Transparent"
+				Content="❌"
+				FontSize="14"
+				HorizontalContentAlignment="Left"
+				Command="{Binding Close}"
+				CommandParameter="{Binding ElementName=MainWindowControl}"/>
+		
+		<!--Column 1-->
+		<Button Grid.Column="1" Grid.Row="1"
+				HorizontalAlignment="Stretch"
+				VerticalAlignment="Stretch"
+				Command="{Binding ToggleIconBackground}"
+				Content="{Binding ToggleButtonText}"/>
+
+		<Button Grid.Column="1" Grid.Row="2"
+			HorizontalAlignment="Stretch"
+			VerticalAlignment="Stretch"
+				Command="{Binding OpenSettings}">
+			Settings
+		</Button>
+		
+	</Grid>
+
+</Window>
