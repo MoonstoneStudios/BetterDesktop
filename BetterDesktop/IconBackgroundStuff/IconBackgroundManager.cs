@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using static BetterDesktop.IconBackgroundStuff.Externs;
 
 namespace BetterDesktop.IconBackgroundStuff
@@ -17,24 +18,40 @@ namespace BetterDesktop.IconBackgroundStuff
 
         public Settings settings;
 
+        public RegistryMonitor desktopIconsMonitor;
+        public RegistryMonitor wallpaperMonitor;
+
         public IconBackgroundManager()
         {
             // when the desktop is changed, repaint.
-            var regMonitor = new RegistryMonitor("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop");
-            regMonitor.RegChanged += Start;
-            regMonitor.Start();
+            desktopIconsMonitor = new RegistryMonitor("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\Shell\\Bags\\1\\Desktop");
+            desktopIconsMonitor.RegChanged += Start;
+            desktopIconsMonitor.Start();
+
+            // when the wallpaper is changed, repaint.
+            wallpaperMonitor = new RegistryMonitor("HKEY_CURRENT_USER\\Control Panel\\Desktop");
+            wallpaperMonitor.RegChanged += StartWithDelay;
+            wallpaperMonitor.Start();
         }
 
         /// <summary>Setup the manager and paint.</summary>
         public void Start(object sender = null, EventArgs e = null)
         {
-            Reset();
+            ResetWallpaper();
 
             // Get the folder view.
             var handle = FindDesktopFolderView();
             points = GetIconPositions(handle);
             workerW = GetWorkerW();
             Paint();
+        }
+
+        /// <summary>When the wallpaper is changed, reset after a second because if the fading transition.</summary>
+        public void StartWithDelay(object sender = null, EventArgs e = null)
+        {
+            // one second should give it enough time.
+            Thread.Sleep(1000);
+            Start();
         }
 
         /// <summary>Paint underneath the desktop icons.</summary>
@@ -246,7 +263,7 @@ namespace BetterDesktop.IconBackgroundStuff
         }
 
         /// <summary>Refreshes desktop wallpaper, undoing everything.</summary>
-        public void Reset()
+        public void ResetWallpaper()
         {
             SystemParametersInfo(SPI_SETDESKWALLPAPER,
                 0,
@@ -270,6 +287,14 @@ namespace BetterDesktop.IconBackgroundStuff
             graphics.DrawImage(img, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imgAttribute);
             graphics.Dispose();   // Releasing all resource used by graphics 
             return bmp;
+        }
+
+        /// <summary>Stop the icons being painted when the application exits.</summary>
+        public void Stop()
+        {
+            ResetWallpaper();
+            desktopIconsMonitor.Stop();
+            wallpaperMonitor.Stop();
         }
     }
 }

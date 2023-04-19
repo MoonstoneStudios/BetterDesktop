@@ -59,7 +59,7 @@ namespace BetterDesktop.ViewModels
             OnPropertyChanged(nameof(ToggleButtonText));
 
             if (!iconBackgroundPainted)
-                manager.Reset();
+                manager.ResetWallpaper();
             else
                 manager.Start();
         }
@@ -84,8 +84,12 @@ namespace BetterDesktop.ViewModels
         {
             var settingsWindow = ((SettingsWindow)sender).DataContext as SettingsWindowViewModel;
             manager.settings = settingsWindow.GetNewSettings();
-            // restart the icons.
-            manager.Start();
+
+            if (iconBackgroundPainted)
+            {
+                // restart the icons.
+                manager.Start();
+            }
         }
 
         /// <summary>Called when the window is closing.</summary>
@@ -99,7 +103,7 @@ namespace BetterDesktop.ViewModels
             else
             {
                 // window is being closed for good, reset the wallpaper
-                manager.Reset();
+                manager.Stop();
             }
         }
 
