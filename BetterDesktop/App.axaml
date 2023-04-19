@@ -10,4 +10,18 @@
         <FluentTheme Mode="Dark"/>
 		<StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
     </Application.Styles>
+
+	<!--taken and altered from https://docs.avaloniaui.net/docs/controls/tray-icon-->
+	<TrayIcon.Icons>
+		<TrayIcons>
+			<TrayIcon Icon="/Assets/avalonia-logo.ico" ToolTipText="Avalonia Tray Icon ToolTip">
+				<TrayIcon.Menu>
+					<NativeMenu>
+						<NativeMenuItem Header="Open window" Command="{Binding OpenWindowCommand}" />
+						<NativeMenuItem Header="Exit" Command="{Binding ExitCommand}" />
+					</NativeMenu>
+				</TrayIcon.Menu>
+			</TrayIcon>
+		</TrayIcons>
+	</TrayIcon.Icons>
 </Application>

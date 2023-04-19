@@ -1,5 +1,10 @@
 Used Code Licenses
 
+Avalonia UI
+MIT License
+Source: https://github.com/AvaloniaUI/Avalonia
+License: https://github.com/AvaloniaUI/Avalonia/blob/master/licence.md
+
 Change opacity of an image
 CPOL 1.02
 Source: https://www.codeproject.com/Tips/201129/Change-Opacity-of-Image-in-C

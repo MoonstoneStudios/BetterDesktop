@@ -17,5 +17,9 @@ namespace BetterDesktop.Models
         [ObservableProperty]
         private Color paintColor = Color.FromArgb(90, 0, 0, 0);
 
+        /// <summary>If the app should minimize to the system tray when the window is closed.</summary>
+        [ObservableProperty]
+        private bool minimizeToTrayOnClose = true;
+
     }
 }

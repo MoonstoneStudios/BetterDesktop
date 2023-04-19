@@ -29,12 +29,25 @@ namespace BetterDesktop.ViewModels
         /// <summary>A shorthand for the icon manager settings.</summary>
         private Settings Settings => manager.settings;
 
+        /// <summary>The main window.</summary>
+        private Window window;
+
+        public bool forceClose;
+
         public MainWindowViewModel()
         {
             manager = new IconBackgroundManager();
             // create the manager's settings.
             manager.settings = new Settings();
             manager.Start();
+        }
+
+        /// <summary>Setup the window</summary>
+        /// <param name="window">The window that this view model controls.</param>
+        public void SetupWindow(Window window)
+        {
+            this.window = window;
+            window.Closing += WindowClosing;
         }
 
         /// <summary>Toggle the icon background.</summary>
@@ -75,14 +88,19 @@ namespace BetterDesktop.ViewModels
             manager.Start();
         }
 
-        /// <summary>Close the app.</summary>
-        /// <param name="window">The window.</param>
-        [RelayCommand]
-        private void Close(Window window)
+        /// <summary>Called when the window is closing.</summary>
+        private void WindowClosing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
-            manager.Reset();
-            // minimize to tray later.
-            window.Close();
+            if (Settings.MinimizeToTrayOnClose && !forceClose)
+            {
+                e.Cancel = true;
+                window.Hide();
+            }
+            else
+            {
+                // window is being closed for good, reset the wallpaper
+                manager.Reset();
+            }
         }
 
     }

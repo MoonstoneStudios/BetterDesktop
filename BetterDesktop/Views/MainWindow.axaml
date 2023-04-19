@@ -33,13 +33,13 @@
 		<Button Grid.Column="1"
 				HorizontalAlignment="Stretch"
 				VerticalAlignment="Stretch"
-				Command="{Binding ToggleIconBackground}"
+				Command="{Binding ToggleIconBackgroundCommand}"
 				Content="{Binding ToggleButtonText}"/>
 
 		<Button Grid.Column="1" Grid.Row="1"
 			HorizontalAlignment="Stretch"
 			VerticalAlignment="Stretch"
-				Command="{Binding OpenSettings}">
+				Command="{Binding OpenSettingsCommand}">
 			Settings
 		</Button>
 		

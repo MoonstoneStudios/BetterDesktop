@@ -35,6 +35,12 @@
 
 				<cp:ColorPicker Color="{Binding	Settings.PaintColor, Mode=TwoWay}"/>
 
+				<TextBlock>
+					Minimize to system tray on close
+				</TextBlock>
+				
+				<CheckBox IsChecked="{Binding Settings.MinimizeToTrayOnClose}" />
+
 			</StackPanel>
 		</ScrollViewer>
 
@@ -42,11 +48,11 @@
 		<Grid ColumnDefinitions="*,*" HorizontalAlignment="Stretch"
 				VerticalAlignment="Bottom" Background="Black">
 			<Button HorizontalAlignment="Stretch"
-					Command="{Binding Cancel}"
+					Command="{Binding CancelCommand}"
 					CommandParameter="{Binding	ElementName=SettingsWind}">Close</Button>
 			<Button Grid.Column="1"
 					HorizontalAlignment="Stretch"
-					Command="{Binding Ok}"
+					Command="{Binding OkCommand}"
 					CommandParameter="{Binding ElementName=SettingsWind}">Ok</Button>
 		</Grid>
 		
