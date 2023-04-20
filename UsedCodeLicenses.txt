@@ -42,3 +42,8 @@ Copy Method and entire ObjectExtensions.cs file
 CC BY-SA 4.0 License
 Source: https://stackoverflow.com/a/11308879
 License: https://creativecommons.org/licenses/by-sa/4.0/
+
+Create a shortcut file
+CC BY-SA 4.0 License
+Source: https://stackoverflow.com/a/4909475
+License: https://creativecommons.org/licenses/by-sa/4.0/
