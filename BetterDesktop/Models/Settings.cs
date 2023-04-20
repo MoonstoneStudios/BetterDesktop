@@ -21,5 +21,9 @@ namespace BetterDesktop.Models
         [ObservableProperty]
         private bool minimizeToTrayOnClose = true;
 
+        /// <summary>If the app should startup when the system starts up.</summary>
+        [ObservableProperty]
+        private bool startupOnSystemStartup = true;
+
     }
 }

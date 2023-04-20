@@ -10,6 +10,9 @@ namespace BetterDesktop
 {
     public partial class App : Application
     {
+        /// <summary>If the app was run during startup</summary>
+        public static bool StartedOnStartup { get; set; }
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);

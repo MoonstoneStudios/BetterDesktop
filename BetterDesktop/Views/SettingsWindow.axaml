@@ -41,6 +41,12 @@
 				
 				<CheckBox IsChecked="{Binding Settings.MinimizeToTrayOnClose}" />
 
+				<TextBlock>
+					Start app on system startup
+				</TextBlock>
+
+				<CheckBox IsChecked="{Binding Settings.StartupOnSystemStartup}" />
+
 			</StackPanel>
 		</ScrollViewer>
 

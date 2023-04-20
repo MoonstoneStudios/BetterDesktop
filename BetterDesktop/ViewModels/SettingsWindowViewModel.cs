@@ -33,6 +33,21 @@ namespace BetterDesktop.ViewModels
         [RelayCommand]
         public void Ok(Window window)
         {
+            // the option has changed for startup.
+            if (oldSettings.StartupOnSystemStartup != Settings.StartupOnSystemStartup)
+            {
+                var startup = new SystemStartupManager();
+                // previously no startup
+                if (Settings.StartupOnSystemStartup)
+                {
+                    startup.CreateShortcut();
+                }
+                // no longer startup at system startup
+                else
+                {
+                    startup.RemoveShortcut();
+                }
+            }
             window.Close();
         }
 
