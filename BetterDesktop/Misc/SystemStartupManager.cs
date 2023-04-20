@@ -23,6 +23,7 @@ namespace BetterDesktop.Misc
             return File.Exists(GetShortcutPath());
         }
 
+        /// <summary>Create the startup shortcut.</summary>
         // https://stackoverflow.com/a/4909475
         public void CreateShortcut()
         {
@@ -34,6 +35,7 @@ namespace BetterDesktop.Misc
             shortcut.Save();
         }
 
+        /// <summary>Remove the startup shortcut.</summary>
         public void RemoveShortcut()
         {
             if (CheckForStartup())
@@ -42,6 +44,7 @@ namespace BetterDesktop.Misc
             }
         }
 
+        /// <summary>Get the path of the startup shortcut.</summary>
         private string GetShortcutPath()
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.Startup);

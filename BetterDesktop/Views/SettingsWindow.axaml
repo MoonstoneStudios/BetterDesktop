@@ -47,6 +47,16 @@
 
 				<CheckBox IsChecked="{Binding Settings.StartupOnSystemStartup}" />
 
+				<TextBlock>
+					Group close icons into boxes
+				</TextBlock>
+
+				<CheckBox IsChecked="{Binding Settings.Group}" x:Name="group" />
+				
+				<NumericUpDown Value="{Binding Settings.GroupMaxDistance}" 
+							   Minimum="185" Maximum="400" 
+							   Increment="15" IsEnabled="{Binding	#group.IsChecked}" />
+
 			</StackPanel>
 		</ScrollViewer>
 

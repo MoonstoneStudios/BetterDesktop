@@ -1,10 +1,12 @@
-﻿using BetterDesktop.Models;
+﻿using BetterDesktop.Misc;
+using BetterDesktop.Models;
 using RegistryUtils;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using static BetterDesktop.IconBackgroundStuff.Externs;
 
@@ -64,15 +66,27 @@ namespace BetterDesktop.IconBackgroundStuff
                 Bitmap b = new Bitmap(1920, 1080);
                 using (Graphics bg = Graphics.FromImage(b))
                 {
-                    for (int i = 0; i < points.Length; i++)
+                    if (settings.Group)
                     {
-                        var solid = Color.FromArgb(255, settings.PaintColor.R, settings.PaintColor.G, settings.PaintColor.B);
-                        // Use the Graphics instance to draw a white rectangle in the upper 
-                        // left corner. In case you have more than one monitor think of the 
-                        // drawing area as a rectangle that spans across all monitors, and 
-                        // the 0,0 coordinate being in the upper left corner.
-                        bg.FillRectangle(new SolidBrush(solid),
-                            points[i].X - 18, points[i].Y - 2, 76 + /*offset =>*/ 25, 100);
+                        var rects = new Grouper().GroupPoints(points, settings.GroupMaxDistance);
+                        for (int i = 0; i < rects.Count; i++)
+                        {
+                            var solid = Color.FromArgb(255, settings.PaintColor.R, settings.PaintColor.G, settings.PaintColor.B);
+                            bg.FillRectangle(new SolidBrush(solid), rects[i]);
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < points.Length; i++)
+                        {
+                            var solid = Color.FromArgb(255, settings.PaintColor.R, settings.PaintColor.G, settings.PaintColor.B);
+                            // Use the Graphics instance to draw a white rectangle in the upper 
+                            // left corner. In case you have more than one monitor think of the 
+                            // drawing area as a rectangle that spans across all monitors, and 
+                            // the 0,0 coordinate being in the upper left corner.
+                            bg.FillRectangle(new SolidBrush(solid),
+                                points[i].X - 18, points[i].Y - 2, 76 + /*offset =>*/ 25, 100);
+                        }
                     }
                 }
                 b = ChangeOpacity(b, settings.PaintColor.A / 255f);

@@ -48,6 +48,7 @@ namespace BetterDesktop.ViewModels
                     startup.RemoveShortcut();
                 }
             }
+
             window.Close();
         }
 

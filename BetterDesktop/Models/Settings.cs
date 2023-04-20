@@ -12,7 +12,6 @@ namespace BetterDesktop.Models
     [ObservableObject]
     internal partial class Settings
     {
-
         /// <summary>The paint color</summary>
         [ObservableProperty]
         private Color paintColor = Color.FromArgb(90, 0, 0, 0);
@@ -25,5 +24,12 @@ namespace BetterDesktop.Models
         [ObservableProperty]
         private bool startupOnSystemStartup = true;
 
+        /// <summary>If the icons should be grouped into boxes.</summary>
+        [ObservableProperty]
+        private bool group = false;
+
+        /// <summary>The maximum distance between icons to stay within a box.</summary>
+        [ObservableProperty]
+        private float groupMaxDistance = 185;
     }
 }
