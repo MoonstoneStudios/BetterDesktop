@@ -9,7 +9,8 @@
         Title="SettingsWindow"
 		Width="450" Height="800"
 		WindowStartupLocation="CenterScreen"
-		CanResize="False">
+		CanResize="False"
+		Icon="/Assets/Logo.ico">
 
 	<Window.Styles>
 		<!--Hide the properties tab-->
@@ -61,15 +62,25 @@
 		</ScrollViewer>
 
 		<!--Sticky buttons at bottom.-->
-		<Grid ColumnDefinitions="*,*" HorizontalAlignment="Stretch"
+		<Grid ColumnDefinitions="*,*" RowDefinitions="*,*" HorizontalAlignment="Stretch"
 				VerticalAlignment="Bottom" Background="Black">
+
+			<Button HorizontalAlignment="Stretch"
+					Command="{Binding ResetToDefaultsCommand}"
+					Grid.ColumnSpan="2"
+					IsVisible="{Binding	SettingsHasChanged}">
+				Reset to defauts
+			</Button>
+			
 			<Button HorizontalAlignment="Stretch"
 					Command="{Binding CancelCommand}"
-					CommandParameter="{Binding	ElementName=SettingsWind}">Close</Button>
+					CommandParameter="{Binding	ElementName=SettingsWind}"
+					Grid.Row="1">Close</Button>
 			<Button Grid.Column="1"
 					HorizontalAlignment="Stretch"
 					Command="{Binding OkCommand}"
-					CommandParameter="{Binding ElementName=SettingsWind}">Ok</Button>
+					CommandParameter="{Binding ElementName=SettingsWind}"
+					Grid.Row="1">Ok</Button>
 		</Grid>
 		
 	</Grid>

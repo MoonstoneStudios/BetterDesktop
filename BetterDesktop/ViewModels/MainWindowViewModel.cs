@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using BetterDesktop.IconBackgroundStuff;
+using BetterDesktop.Misc;
 using BetterDesktop.Models;
 using BetterDesktop.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -32,13 +33,16 @@ namespace BetterDesktop.ViewModels
         /// <summary>The main window.</summary>
         private Window window;
 
+        /// <summary>If the window should close forcefully.</summary>
         public bool forceClose;
 
         public MainWindowViewModel()
         {
             manager = new IconBackgroundManager();
+            
             // create the manager's settings.
-            manager.settings = new Settings();
+            var settings = new SettingsLoader();
+            manager.settings = settings.LoadSettings();
             manager.Start();
         }
 
@@ -102,6 +106,8 @@ namespace BetterDesktop.ViewModels
             }
             else
             {
+                var settings = new SettingsLoader();
+                settings.SaveSettings(Settings);
                 // window is being closed for good, reset the wallpaper
                 manager.Stop();
             }

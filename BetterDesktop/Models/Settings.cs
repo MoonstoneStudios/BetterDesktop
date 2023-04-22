@@ -31,5 +31,20 @@ namespace BetterDesktop.Models
         /// <summary>The maximum distance between icons to stay within a box.</summary>
         [ObservableProperty]
         private float groupMaxDistance = 185;
+
+        public static bool operator ==(Settings a, Settings b)
+        {
+            return a.PaintColor == b.PaintColor &&
+                a.MinimizeToTrayOnClose == b.MinimizeToTrayOnClose &&
+                a.StartupOnSystemStartup == b.StartupOnSystemStartup &&
+                a.Group == b.Group &&
+                a.GroupMaxDistance == b.GroupMaxDistance;
+        }
+
+        public static bool operator !=(Settings a, Settings b)
+        {
+            return !(a == b);
+        }
+
     }
 }

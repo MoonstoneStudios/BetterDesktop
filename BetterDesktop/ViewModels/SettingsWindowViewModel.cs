@@ -17,15 +17,30 @@ namespace BetterDesktop.ViewModels
     internal partial class SettingsWindowViewModel
     {
         /// <summary>The settings of the icons. This will be updated by the View.</summary>
-        private Settings Settings { get; set; } = new Settings();
-        
+        [ObservableProperty]
+        private Settings settings = new Settings();
+
         /// <summary>The old settigs.</summary>
         private Settings oldSettings;
+
+        [ObservableProperty]
+        /// <summary>If the settings have changed.</summary>
+        private bool settingsHasChanged;
 
         public SettingsWindowViewModel(Settings settings)
         {
             Settings = settings;
             oldSettings = settings.Copy();
+
+            CheckForChangedSettings();
+
+            // when settings have changed.
+            Settings.PropertyChanged += (s, e) =>
+            {
+                // if the current settings doesn't equal
+                // the default values.
+                CheckForChangedSettings();
+            };
         }
 
         /// <summary>When OK is clicked.</summary>
@@ -53,6 +68,23 @@ namespace BetterDesktop.ViewModels
         }
 
         [RelayCommand]
+        /// <summary>Reset the settings</summary>
+        public void ResetToDefaults()
+        {
+            // set to default.
+            Settings = new Settings();
+            // rehook the changed event.
+            // when settings have changed.
+            Settings.PropertyChanged += (s, e) =>
+            {
+                // if the current settings doesn't equal
+                // the default values.
+                CheckForChangedSettings();
+            };
+        }
+
+        /// <summary>Closes the windows and sets settings to old one.</summary>
+        [RelayCommand]
         public void Cancel(Window window)
         {
             Settings = oldSettings;
@@ -63,6 +95,12 @@ namespace BetterDesktop.ViewModels
         public Settings GetNewSettings()
         {
             return Settings;
+        }
+
+        /// <summary>If the settings aren't the default settings.</summary>
+        private void CheckForChangedSettings()
+        {
+            SettingsHasChanged = Settings != new Settings();
         }
 
     }
