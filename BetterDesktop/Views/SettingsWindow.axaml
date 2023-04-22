@@ -6,81 +6,68 @@
         mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="800"
         x:Class="BetterDesktop.Views.SettingsWindow"
 		x:Name="SettingsWind"
-        Title="SettingsWindow"
+        Title="BetterDesktop - Settings"
 		Width="450" Height="800"
 		WindowStartupLocation="CenterScreen"
 		CanResize="False"
-		Icon="/Assets/Logo.ico">
-
-	<Window.Styles>
-		<!--Hide the properties tab-->
-		<Style Selector="cp|ColorPicker /template/ cp|ColorPickerPropertiesPresenter#PART_ColorPickerPropertiesPresenter">
-			<Setter Property="IsVisible" Value="False" />
-		</Style>
-	</Window.Styles>
-
+		Icon="/Assets/Logo.ico"
+		Classes="WithPadding">
 	<Grid>
-		<ScrollViewer>		
-			<StackPanel Orientation="Vertical">
+		<StackPanel Orientation="Vertical">
 
-				<TextBlock>
-					Settings
-				</TextBlock>
+			<TextBlock Classes="Header">
+				Settings
+			</TextBlock>
 		
-				<Rectangle Height="2" HorizontalAlignment="Stretch"
-						   Fill="White"/>
+			<Rectangle Classes="Seperator"/>
 
-				<TextBlock>
-					Paint color
-				</TextBlock>
+			<TextBlock>
+				Paint color
+			</TextBlock>
 
-				<cp:ColorPicker Color="{Binding	Settings.PaintColor, Mode=TwoWay}"/>
+			<cp:ColorPicker Color="{Binding	Settings.PaintColor, Mode=TwoWay}"/>
 
-				<TextBlock>
-					Minimize to system tray on close
-				</TextBlock>
+			<CheckBox IsChecked="{Binding Settings.MinimizeToTrayOnClose}" 
+					  Content="Minimize to system tray on close" 
+					  Margin="0,6,0,0"/>
+
+			<CheckBox IsChecked="{Binding Settings.StartupOnSystemStartup}" 
+					  Content="Start app on system startup"/>
+
+			<CheckBox IsChecked="{Binding Settings.Group}" 
+					  x:Name="group" 
+					  Content="Group close icons into boxes"/>
 				
-				<CheckBox IsChecked="{Binding Settings.MinimizeToTrayOnClose}" />
+			<NumericUpDown Value="{Binding Settings.GroupMaxDistance}" 
+						   Minimum="125" Maximum="400" 
+						   Increment="15" IsEnabled="{Binding #group.IsChecked}"
+						   Margin="30,0,0,0"/>
 
-				<TextBlock>
-					Start app on system startup
-				</TextBlock>
-
-				<CheckBox IsChecked="{Binding Settings.StartupOnSystemStartup}" />
-
-				<TextBlock>
-					Group close icons into boxes
-				</TextBlock>
-
-				<CheckBox IsChecked="{Binding Settings.Group}" x:Name="group" />
-				
-				<NumericUpDown Value="{Binding Settings.GroupMaxDistance}" 
-							   Minimum="185" Maximum="400" 
-							   Increment="15" IsEnabled="{Binding	#group.IsChecked}" />
-
-			</StackPanel>
-		</ScrollViewer>
+		</StackPanel>
 
 		<!--Sticky buttons at bottom.-->
-		<Grid ColumnDefinitions="*,*" RowDefinitions="*,*" HorizontalAlignment="Stretch"
-				VerticalAlignment="Bottom" Background="Black">
+		<Grid ColumnDefinitions="*,*" 
+			  RowDefinitions="*,*" 
+			  HorizontalAlignment="Stretch"
+			  VerticalAlignment="Bottom">
 
-			<Button HorizontalAlignment="Stretch"
-					Command="{Binding ResetToDefaultsCommand}"
+			<Button Command="{Binding ResetToDefaultsCommand}"
 					Grid.ColumnSpan="2"
 					IsVisible="{Binding	SettingsHasChanged}">
 				Reset to defauts
 			</Button>
 			
-			<Button HorizontalAlignment="Stretch"
-					Command="{Binding CancelCommand}"
-					CommandParameter="{Binding	ElementName=SettingsWind}"
-					Grid.Row="1">Close</Button>
+			<Button Command="{Binding CancelCommand}"
+					CommandParameter="{Binding ElementName=SettingsWind}"
+					Grid.Row="1">
+				Close
+			</Button>
 			<Button Grid.Column="1"
-					HorizontalAlignment="Stretch"
 					Command="{Binding OkCommand}"
 					CommandParameter="{Binding ElementName=SettingsWind}"
-					Grid.Row="1">Ok</Button>
+					Grid.Row="1">
+				Ok
+			</Button>
 		</Grid>
 		
 	</Grid>

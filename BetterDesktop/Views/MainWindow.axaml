@@ -10,7 +10,8 @@
         Title="BetterDesktop"
 		WindowStartupLocation="CenterScreen"
 		Width="800" Height="450"
-		CanResize="False">
+		CanResize="False"
+		Classes="WithPadding">
 	
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -18,37 +19,44 @@
 
 	<!--Main grid-->
 	<Grid>
-
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="2*"/>
 		</Grid.ColumnDefinitions>
 
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Image Source="/Assets/Logo.png"
-			   HorizontalAlignment="Center"
-			   VerticalAlignment="Center"
-			   Grid.RowSpan="2"
-			   Margin="15"/>
-		
-		<!--Column 1-->
-		<Button Grid.Column="1"
-				HorizontalAlignment="Stretch"
-				VerticalAlignment="Stretch"
-				Command="{Binding ToggleIconBackgroundCommand}"
-				Content="{Binding ToggleButtonText}"/>
+		<!--Title-->
+		<StackPanel Orientation="Vertical"
+					Grid.ColumnSpan="2">			
+			<TextBlock Classes="Header">
+				BetterDesktop
+			</TextBlock>
 
+			<Rectangle Classes="Seperator"/>
+		</StackPanel>
+
+		<!--Image logo-->
+		<Image Source="/Assets/Logo.png"
+			   Grid.Row="1"
+			   Grid.RowSpan="2"/>
+		
+		<!--On/Off button-->
 		<Button Grid.Column="1" Grid.Row="1"
-			HorizontalAlignment="Stretch"
-			VerticalAlignment="Stretch"
-				Command="{Binding OpenSettingsCommand}">
+				Command="{Binding ToggleIconBackgroundCommand}"
+				Content="{Binding ToggleButtonText}"
+				Classes="BigButton"/>
+
+		<!--Settings button-->
+		<Button Grid.Column="1" Grid.Row="2"
+				Command="{Binding OpenSettingsCommand}"
+				Classes="BigButton">
 			Settings
 		</Button>
 		
 	</Grid>
-
 </Window>

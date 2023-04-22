@@ -9,12 +9,13 @@
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
 		<StyleInclude Source="avares://ThemeEditor.Controls.ColorPicker/ColorPicker.axaml" />
+		<StyleInclude Source="/Assets/Styles.axaml"/>
     </Application.Styles>
 
 	<!--taken and altered from https://docs.avaloniaui.net/docs/controls/tray-icon-->
 	<TrayIcon.Icons>
 		<TrayIcons>
-			<TrayIcon Icon="/Assets/Logo.ico" ToolTipText="Avalonia Tray Icon ToolTip">
+			<TrayIcon Icon="/Assets/Logo.ico" ToolTipText="Right click to open menu">
 				<TrayIcon.Menu>
 					<NativeMenu>
 						<NativeMenuItem Header="Open window" Command="{Binding OpenWindowCommand}" />
