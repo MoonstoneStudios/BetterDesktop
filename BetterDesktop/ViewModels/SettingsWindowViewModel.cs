@@ -73,6 +73,7 @@ namespace BetterDesktop.ViewModels
         {
             // set to default.
             Settings = new Settings();
+            SettingsHasChanged = false;
             // rehook the changed event.
             // when settings have changed.
             Settings.PropertyChanged += (s, e) =>
