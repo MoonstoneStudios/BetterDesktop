@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Input;
 using BetterDesktop.IconBackgroundStuff;
 using BetterDesktop.Misc;
 using BetterDesktop.Models;
@@ -36,6 +37,9 @@ namespace BetterDesktop.ViewModels
         /// <summary>If the window should close forcefully.</summary>
         public bool forceClose;
 
+        /// <summary>If the shift key is pressed.</summary>
+        private bool shiftPressed;
+
         public MainWindowViewModel()
         {
             manager = new IconBackgroundManager();
@@ -52,6 +56,21 @@ namespace BetterDesktop.ViewModels
         {
             this.window = window;
             window.Closing += WindowClosing;
+
+            window.KeyDown += (s, e) =>
+            {
+                if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
+                {
+                    shiftPressed = true;
+                }
+            };
+            window.KeyUp += (s, e) =>
+            {
+                if (e.Key == Key.LeftShift || e.Key == Key.RightShift)
+                {
+                    shiftPressed = false;
+                }
+            };
         }
 
         /// <summary>Toggle the icon background.</summary>
@@ -99,7 +118,7 @@ namespace BetterDesktop.ViewModels
         /// <summary>Called when the window is closing.</summary>
         private void WindowClosing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Settings.MinimizeToTrayOnClose && !forceClose)
+            if (Settings.MinimizeToTrayOnClose && !forceClose && !shiftPressed)
             {
                 e.Cancel = true;
                 window.Hide();
