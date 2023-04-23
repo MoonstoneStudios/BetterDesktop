@@ -78,6 +78,14 @@ namespace BetterDesktop.IconBackgroundStuff
         [DllImport("user32.dll")]
         public static extern IntPtr GetDCEx(IntPtr hWnd, IntPtr hrgnClip, DeviceContextValues flags);
 
+        // https://stackoverflow.com/a/35373039
+        [DllImport("User32.dll")]
+        public static extern IntPtr GetDC(IntPtr hwnd);
+
+        // https://stackoverflow.com/a/35373039
+        [DllImport("gdi32.dll")]
+        public static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
+
         [DllImport("user32.dll")]
         public static extern bool ReleaseDC(IntPtr hWnd, IntPtr hDC);
 

@@ -63,7 +63,17 @@ namespace BetterDesktop.IconBackgroundStuff
             IntPtr dc = GetDCEx(workerW, IntPtr.Zero, (DeviceContextValues)0x403);
             if (dc != IntPtr.Zero)
             {
-                Bitmap b = new Bitmap(1920, 1080);
+                // gets the screen and its size.
+                // https://stackoverflow.com/a/35373039
+                var screenHandle = GetDC(IntPtr.Zero);
+                int DESKTOPVERTRES = 117;
+                int DESKTOPHORZRES = 118;
+                int actualPixelsX = GetDeviceCaps(screenHandle, DESKTOPHORZRES);
+                int actualPixelsY = GetDeviceCaps(screenHandle, DESKTOPVERTRES);
+                ReleaseDC(IntPtr.Zero, screenHandle);
+
+                // TODO: multiple monitors.
+                Bitmap b = new Bitmap(actualPixelsX, actualPixelsY);
                 using (Graphics bg = Graphics.FromImage(b))
                 {
                     if (settings.Group)
@@ -80,12 +90,10 @@ namespace BetterDesktop.IconBackgroundStuff
                         for (int i = 0; i < points.Length; i++)
                         {
                             var solid = Color.FromArgb(255, settings.PaintColor.R, settings.PaintColor.G, settings.PaintColor.B);
-                            // Use the Graphics instance to draw a white rectangle in the upper 
-                            // left corner. In case you have more than one monitor think of the 
-                            // drawing area as a rectangle that spans across all monitors, and 
-                            // the 0,0 coordinate being in the upper left corner.
+                            // The icons suck, their positions make no sense to me
+                            // hence, the crazy numbers below.
                             bg.FillRectangle(new SolidBrush(solid),
-                                points[i].X - 18, points[i].Y - 2, 76 + /*offset =>*/ 25, 100);
+                                points[i].X - 34, points[i].Y - 18, 116, 116);
                         }
                     }
                 }
@@ -93,8 +101,8 @@ namespace BetterDesktop.IconBackgroundStuff
                 // Create a Graphics instance from the Device Context
                 using (Graphics g = Graphics.FromHdc(dc))
                 {
-                    // Use the Graphics instance to draw a white rectangle in the upper 
-                    // left corner. In case you have more than one monitor think of the 
+                    // Use the Graphics instance to draw.
+                    // In case you have more than one monitor think of the 
                     // drawing area as a rectangle that spans across all monitors, and 
                     // the 0,0 coordinate being in the upper left corner.
                     g.DrawImage(b, 0, 0);
