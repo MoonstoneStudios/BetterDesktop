@@ -63,4 +63,8 @@
 		<Setter Property="IsVisible" Value="False" />
 	</Style>
 
+	<Style Selector="Grid.ColoredGrid">
+		<Setter Property="Background" Value="#211336" />
+	</Style>
+	
 </Styles>

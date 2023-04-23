@@ -10,7 +10,8 @@
         Title="BetterDesktop"
 		WindowStartupLocation="CenterScreen"
 		Width="800" Height="450"
-		CanResize="False"
+		MaxWidth="800" MaxHeight="450"
+		MinWidth="315" MinHeight="195"
 		Classes="WithPadding">
 	
     <Design.DataContext>

@@ -8,8 +8,9 @@
 		x:Name="SettingsWind"
         Title="BetterDesktop - Settings"
 		Width="450" Height="800"
+		MaxWidth="450" MaxHeight="800"
+		MinWidth="320" MinHeight="510"
 		WindowStartupLocation="CenterScreen"
-		CanResize="False"
 		Icon="/Assets/Logo.ico"
 		Classes="WithPadding">
 	<Grid>
