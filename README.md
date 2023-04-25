@@ -1,6 +1,6 @@
-<center>
+<div align="center">
 <img src="BetterDesktop/Assets/LogoText.png" width="175px" height="175px">
-</center>
+</div>
 
 # BetterDesktop
 Make your desktop icons stand out by adding a colored box beneath them!
