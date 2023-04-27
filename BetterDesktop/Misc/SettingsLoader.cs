@@ -35,8 +35,10 @@ namespace BetterDesktop.Misc
                 }
             }
 
-            // settings doesn't exist, set to default.
-            return new Settings();
+            // settings doesn't exist, set to default. Save.
+            var defaultSettings = new Settings();
+            SaveSettings(defaultSettings);
+            return defaultSettings;
         }
 
         /// <summary>Save the settings</summary>

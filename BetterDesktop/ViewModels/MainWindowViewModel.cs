@@ -107,6 +107,9 @@ namespace BetterDesktop.ViewModels
         {
             var settingsWindow = ((SettingsWindow)sender).DataContext as SettingsWindowViewModel;
             manager.settings = settingsWindow.GetNewSettings();
+            // save settings
+            var settings = new SettingsLoader();
+            settings.SaveSettings(Settings);
 
             if (iconBackgroundPainted)
             {
@@ -125,8 +128,6 @@ namespace BetterDesktop.ViewModels
             }
             else
             {
-                var settings = new SettingsLoader();
-                settings.SaveSettings(Settings);
                 // window is being closed for good, reset the wallpaper
                 manager.Stop();
             }
